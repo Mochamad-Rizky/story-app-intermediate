@@ -33,6 +33,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "eslint-config-prettier": "^8.8.0"
+    "bootstrap": "^5.2.3",
+    "eslint-config-prettier": "^8.8.0",
+    "lit": "^2.7.0"
   }
 }
