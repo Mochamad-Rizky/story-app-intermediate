@@ -18,6 +18,10 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "no-console": "off"
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "off",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "dot-notation": "off"
   }
 }
