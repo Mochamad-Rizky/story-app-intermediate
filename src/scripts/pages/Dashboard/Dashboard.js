@@ -4,8 +4,12 @@ import LitWithoutShadowDom from '../../components/LitWithoutShadowDom/LitWithout
 class Dashboard extends LitWithoutShadowDom {
   render() {
     return html`
-      <h1>Dashboard</h1>
-      <p>Dashboard page</p>
+      <div class="p-3">
+        <div class="p-1 shadow border border-1 rounded-1">
+          <h6>Dashboard</h1>
+          <p>Dashboard page</p>
+        </div>
+      </div>
     `;
   }
 }
