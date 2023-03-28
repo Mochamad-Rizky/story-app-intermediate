@@ -5,6 +5,7 @@ import '../styles/main.scss';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 // components
 import './components/Navbar/Navbar';
+import './components/Footer/Footer';
 
 const app = new App();
 const activeLinkInitiator = new ActiveLinkInitiator();
