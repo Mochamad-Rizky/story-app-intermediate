@@ -1,13 +1,14 @@
 import { html } from 'lit';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
+import '../UI/Button/Button';
 
 class AppBar extends LitWithoutShadowDom {
   render() {
     return html`
-      <nav class="navbar navbar-expand-lg container">
-        <div class="container-fluid">
+      <nav class="navbar bg-nikel py-3 shadow rounded-bottom navbar-expand-lg">
+        <div class="container-fluid container">
           <div class="navbar-brand d-flex align-items-center">
-            <h1 class="ms-3">Story App</h1>
+            <span class="ms-3 text-white">Story App</span>
           </div>
           <button
             class="navbar-toggler"
@@ -23,12 +24,14 @@ class AppBar extends LitWithoutShadowDom {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" data-default-route="/" aria-current="page" href="/#/dashboard"
-                  >Dashboard</a
-                >
+                <app-button class="nav-link" renderType="link" link="/#/dashboard" defaultRoute="/">
+                  Dashboard
+                </app-button>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/#/add-story">Add Story</a>
+                <app-button class="nav-link" renderType="link" link="/#/add-story">
+                  Add Story
+                </app-button>
               </li>
             </ul>
           </div>
