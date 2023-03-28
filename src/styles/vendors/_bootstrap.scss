@@ -1,3 +1,19 @@
+@use 'sass:map';
+
+// variables
+@use '../vendors-extensions/variables/colors' as color;
+
+// custom components
+@use '../vendors-extensions/components/alerts' as alerts;
+@use '../vendors-extensions/components/card' as card;
+@use '../vendors-extensions/components/placeholders' as placeholders;
+@use '../vendors-extensions/components/navbar' as navbar;
+
+// custom utilities
+@use '../vendors-extensions/utilities/text' as txt;
+@use '../vendors-extensions/utilities/border' as br;
+@use '../vendors-extensions/utilities/shadows' as sh;
+
 // ==================================================
 // Bootstrap
 // ==================================================
@@ -13,6 +29,52 @@
 @import '~bootstrap/scss/variables';
 
 // Menerapkan/override variables Bootstrap apa pun di sini
+
+$theme-colors: map.deep-merge($theme-colors, color.$theme-colors);
+
+// ==========
+// custom components
+// ==========
+// alerts
+$alert-border-radius: alerts.$alert-border-radius;
+$alert-border-width: alerts.$alert-border-width;
+$alert-bg-scale: alerts.$alert-bg-scale;
+
+// card
+$card-box-shadow: card.$card-box-shadow;
+$card-border-radius: card.$card-border-radius;
+$card-border-color: card.$card-border-color;
+$card-border-width: card.$card-border-width;
+$card-bg: card.$card-bg;
+
+// placeholders
+$placeholder-opacity-max: placeholders.$placeholder-opacity-max;
+$placeholder-opacity-min: placeholders.$placeholder-opacity-min;
+
+// navbar
+$navbar-light-toggler-icon-bg: navbar.$navbar-light-toggler-icon-bg;
+
+// ==========
+// custom utilities
+// ==========
+// text
+$h1-font-size: txt.$h1-font-size;
+$h2-font-size: txt.$h2-font-size;
+$h3-font-size: txt.$h3-font-size;
+$h4-font-size: txt.$h4-font-size;
+$h5-font-size: txt.$h5-font-size;
+$h6-font-size: txt.$h6-font-size;
+
+// shadows
+$box-shadow: sh.$box-shadow;
+$box-shadow-sm: sh.$box-shadow-sm;
+$box-shadow-lg: sh.$box-shadow-lg;
+
+// border
+$border-radius: br.$border-radius;
+$border-radius-sm: br.$border-radius-sm;
+$border-radius-lg: br.$border-radius-lg;
+$border-radius-xl: br.$border-radius-xl;
 
 //
 // Konfigurasi Bootstrap
@@ -36,7 +98,6 @@
 // Components
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/placeholders';
-@import '~bootstrap/scss/tables';
 @import '~bootstrap/scss/forms';
 @import '~bootstrap/scss/transitions';
 @import '~bootstrap/scss/dropdown';
@@ -44,7 +105,6 @@
 @import '~bootstrap/scss/navbar';
 @import '~bootstrap/scss/card';
 @import '~bootstrap/scss/close';
-@import '~bootstrap/scss/modal';
 
 //
 // Utilities
