@@ -1,0 +1,8 @@
+@mixin pseudo($place: 'after', $content: '', $position: absolute, $display: block) {
+  &::#{$place} {
+    content: $content;
+    position: $position;
+    display: $display;
+    @content;
+  }
+}
