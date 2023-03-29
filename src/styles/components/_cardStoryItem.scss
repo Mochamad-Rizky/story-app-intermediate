@@ -1,0 +1,33 @@
+@use '../mainVariables' as *;
+@use '../mixins/transform' as *;
+@use '../mixins/pseudo' as *;
+@use 'sass:map';
+
+.card__container {
+  .card {
+    position: relative;
+
+    &-body {
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      @include pseudo() {
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(map.get($my-colors, 'cultured'), 0.5);
+        @include transform(rotate(5deg));
+      }
+    }
+  }
+}
