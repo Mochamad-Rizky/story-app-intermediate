@@ -14,8 +14,19 @@ const api = (() => {
       }, fetchTimeoutInSecond);
     });
 
+  const postStory = () =>
+    new Promise((resolve, reject) => {
+      const postTimeoutInSecond = 2000; // for demo purpose only
+
+      setTimeout(() => {
+        resolve('success');
+        // reject('something went wrong');
+      }, postTimeoutInSecond);
+    });
+
   return {
     getStories,
+    postStory,
   };
 })();
 
