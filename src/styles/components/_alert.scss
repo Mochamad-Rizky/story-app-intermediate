@@ -1,0 +1,38 @@
+$time-animation: 2.6s;
+
+.alert {
+  animation: {
+    duration: $time-animation;
+    name: alert;
+  }
+
+  span {
+    height: 10px;
+    display: block;
+    background-color: rgba(153, 139, 139, 0.5);
+    animation: {
+      duration: $time-animation;
+      name: progress;
+    }
+  }
+
+  @keyframes progress {
+    0% {
+      width: 100%;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes alert {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
