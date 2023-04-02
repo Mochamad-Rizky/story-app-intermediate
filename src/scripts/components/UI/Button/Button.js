@@ -17,12 +17,19 @@ class Button extends LitElement {
       outline: {
         type: Boolean,
       },
+      event: {
+        type: String,
+      },
+      disabled: {
+        type: Boolean,
+      },
     };
   }
 
   constructor() {
     super();
     this.renderType = 'link';
+    this.type = 'submit';
   }
 
   static get styles() {
@@ -34,6 +41,19 @@ class Button extends LitElement {
         background-color: rgb(63, 116, 170, 1);
         color: white;
         border-radius: 0.5rem;
+      }
+
+      :host([renderType='button']) button {
+        margin-top: 0.5rem;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 1.2rem;
+        border: none;
+      }
+
+      .btn:disabled {
+        background-color: rgb(63, 116, 170, 0.5);
+        cursor: not-allowed !important;
       }
 
       a {
@@ -55,13 +75,25 @@ class Button extends LitElement {
     return this.#renderLink();
   }
 
+  firstUpdated(_changedProperties) {
+    if (this.event && this.renderType === 'button') {
+      const element = this.shadowRoot.querySelector(this.renderType);
+      if (this.event === 'click') {
+        element.addEventListener(this.event, (event) => {
+          this.#dispatchClickEvent(event);
+        });
+      }
+    }
+    super.firstUpdated(_changedProperties);
+  }
+
   #checkRenderType() {
     return this.renderType === 'button';
   }
 
   #renderButton() {
     return html`
-      <button class="btn">
+      <button class="btn" ?disabled=${this.disabled}>
         <slot></slot>
       </button>
     `;
@@ -73,6 +105,17 @@ class Button extends LitElement {
         <slot></slot>
       </a>
     `;
+  }
+
+  #dispatchClickEvent(event) {
+    const clickEvent = new CustomEvent('clickButton', {
+      detail: {
+        event,
+      },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(clickEvent);
   }
 }
 
