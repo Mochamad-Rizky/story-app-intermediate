@@ -2,6 +2,8 @@ import { html } from 'lit';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import convertDate from '../../utils/convertDate';
 
+import '../Modal/Modal';
+
 class StoryCardItem extends LitWithoutShadowDom {
   static get properties() {
     return {
@@ -43,11 +45,27 @@ class StoryCardItem extends LitWithoutShadowDom {
             <span class="text-secondary fs-6">${convertDate(this.createdAt)}</span>
             <h5 class="card-title text-white fw-bold">${this.name}</h5>
             <p class="card-text text-white">${this.description}</p>
-            <button class="btn btn-primary">Detail</button>
+            <button
+              class="btn btn-primary"
+              @click=${this.#setShowModal}
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Detail
+            </button>
           </div>
         </div>
       </article>
     `;
+  }
+
+  #setShowModal() {
+    const modalElement = document.querySelector('modal-app');
+    modalElement.setAttribute('id', this.id);
+    modalElement.setAttribute('name', this.name);
+    modalElement.setAttribute('description', this.description);
+    modalElement.setAttribute('image', this.image);
+    modalElement.setAttribute('createdAt', this.createdAt);
   }
 }
 
