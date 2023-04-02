@@ -17,6 +17,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   links = Array.from(links).map((link) => link.shadowRoot.querySelector('a'));
   activeLinkInitiator.update(links);
 });
+
 window.addEventListener('hashchange', async () => {
   await app.renderPage();
   activeLinkInitiator.update(links);
