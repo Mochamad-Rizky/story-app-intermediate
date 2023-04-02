@@ -22,6 +22,7 @@
     "import/no-extraneous-dependencies": "off",
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
-    "dot-notation": "off"
+    "dot-notation": "off",
+    "no-unused-vars": "off"
   }
 }
