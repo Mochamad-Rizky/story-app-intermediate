@@ -4,6 +4,8 @@ import '../UI/Button/Button';
 
 class AppBar extends LitWithoutShadowDom {
   render() {
+    const lang = localStorage.getItem('lang');
+
     return html`
       <nav class="navbar bg-nikel py-3 shadow rounded-bottom navbar-expand-lg">
         <div class="container-fluid container">
@@ -24,12 +26,17 @@ class AppBar extends LitWithoutShadowDom {
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <app-button class="nav-link" renderType="link" link="/#/dashboard" defaultRoute="/">
+                <app-button
+                  class="nav-link"
+                  renderType="link"
+                  link="/#/dashboard?lang=${lang}"
+                  defaultRoute="/"
+                >
                   Dashboard
                 </app-button>
               </li>
               <li class="nav-item">
-                <app-button class="nav-link" renderType="link" link="/#/add-story">
+                <app-button class="nav-link" renderType="link" link="/#/add-story?lang=${lang}">
                   Add Story
                 </app-button>
               </li>
