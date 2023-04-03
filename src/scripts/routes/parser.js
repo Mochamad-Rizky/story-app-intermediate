@@ -1,16 +1,14 @@
 import pages from './routes';
+import Route from '../utils/route';
 
 class Parser {
   constructor(rootElement) {
-    this._rootElement = rootElement;
+    this.rootElement = rootElement;
+    this.route = Route.getRouteWithoutHash(window.location.href).pathname;
   }
 
-  getRoute() {
-    return window.location.hash.slice(1).split('?')[0] || '/';
-  }
-
-  async checkIfPageExists({ route, notFound }) {
-    return pages[route] || pages[notFound];
+  async checkIfPageExists({ notFound }) {
+    return pages[this.route] || pages[notFound];
   }
 
   async definePage(page) {
@@ -22,7 +20,7 @@ class Parser {
   }
 
   renderPage(nameOfPage) {
-    this._rootElement.innerHTML = `<${nameOfPage} class="d-block"></${nameOfPage}>`;
+    this.rootElement.innerHTML = `<${nameOfPage} class="d-block"></${nameOfPage}>`;
   }
 }
 
