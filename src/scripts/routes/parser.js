@@ -6,7 +6,7 @@ class Parser {
   }
 
   getRoute() {
-    return window.location.hash.slice(1) || '/';
+    return window.location.hash.slice(1).split('?')[0] || '/';
   }
 
   async checkIfPageExists({ route, notFound }) {
@@ -22,7 +22,7 @@ class Parser {
   }
 
   renderPage(nameOfPage) {
-    this._rootElement.innerHTML = `<${nameOfPage}></${nameOfPage}>`;
+    this._rootElement.innerHTML = `<${nameOfPage} class="d-block"></${nameOfPage}>`;
   }
 }
 
