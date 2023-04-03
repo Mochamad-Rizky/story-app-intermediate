@@ -1,8 +1,14 @@
 import Parser from './routes/parser';
+import checkLang from './utils/lang';
 
 class App {
   constructor() {
+    this.#initialization();
     this.renderPage();
+  }
+
+  #initialization() {
+    checkLang();
   }
 
   async renderPage() {

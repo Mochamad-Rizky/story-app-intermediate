@@ -15,10 +15,11 @@ const activeLinkInitiator = new ActiveLinkInitiator();
 
 let links;
 window.addEventListener('DOMContentLoaded', async () => {
-  checkLang();
   await app.renderPage();
+
   links = document.querySelectorAll('app-button[renderType="link"][class="nav-link"]');
   links = Array.from(links).map((link) => link.shadowRoot.querySelector('a'));
+
   activeLinkInitiator.update(links);
   setLocaleFromUrl();
 });
