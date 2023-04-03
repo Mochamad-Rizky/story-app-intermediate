@@ -1,22 +1,14 @@
-// const checkLang = () => {
-//   const getLang = localStorage.getItem('lang');
-//   if (getLang === null) {
-//     localStorage.setItem('lang', 'id');
-//   }
-//
-//   if (!window.location.href.includes('?lang')) {
-//     const url = new URL(window.location.href);
-//     window.history.pushState({}, '', `${url.hash}?lang=${getLang}`);
-//   }
-// };
+import Route from './route';
 
 const checkLang = (url) => {
-  const urlWithHash = new URL(url);
-  const urlWithoutHash = new URL(url.split('/#').join(''));
-  const getLang = localStorage.getItem('lang');
+  const urlWithHash = Route.getRouteWithHash(window.location.href);
+  const urlWithoutHash = Route.getRouteWithoutHash(window.location.href);
+
+  let getLang = localStorage.getItem('lang');
 
   if (!getLang) {
-    localStorage.setItem('lang', 'id');
+    localStorage.setItem('lang', 'en');
+    getLang = 'en';
   }
 
   if (!urlWithoutHash.searchParams.get('lang')) {
