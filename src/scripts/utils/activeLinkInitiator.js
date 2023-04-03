@@ -1,8 +1,8 @@
-import Parser from '../routes/parser';
+import Route from './route';
 
 class ActiveLinkInitiator {
   update(links) {
-    const route = new Parser().getRoute();
+    const route = Route.getRouteWithoutHash(window.location.href).pathname;
     this.#performAction(links, route);
   }
 
