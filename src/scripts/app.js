@@ -8,10 +8,8 @@ class App {
   async renderPage() {
     const rootElement = document.querySelector('main');
     const parser = new Parser(rootElement);
-    const route = await parser.getRoute();
 
     const page = await parser.checkIfPageExists({
-      route,
       notFound: '/not-found',
     });
 
