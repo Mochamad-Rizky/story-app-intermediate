@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="id" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="s5e8250fb85d64c23">
+  <source>Close</source>
+  <target>Tutup</target>
+</trans-unit>
+<trans-unit id="s8daa1db5187d4ad4">
+  <source>Detail</source>
+  <target>Selengkapnya</target>
+</trans-unit>
+<trans-unit id="s8b81550ee72bf3e8">
+  <source>List Story</source>
+  <target>Daftar Cerita</target>
+</trans-unit>
+<trans-unit id="s1f30f2eaf1e38fb9">
+  <source>Add Story</source>
+  <target>Tambah Cerita</target>
+</trans-unit>
+<trans-unit id="s3c30b8ed468a13b3">
+  <source>Looks good!</source>
+  <target>Terlihat Bagus</target>
+</trans-unit>
+<trans-unit id="s2b46a91307f0ed8f">
+  <source>Please choose a file.</source>
+  <target>Mohon pilih sebuah file</target>
+</trans-unit>
+<trans-unit id="sc1663ad8bc983cc8">
+  <source>Story description</source>
+  <target>Deskripsi cerita</target>
+</trans-unit>
+<trans-unit id="s2a309fabbfbf6e26">
+  <source>Please enter a description.</source>
+  <target>Mohon isi sebuah deskripsi.</target>
+</trans-unit>
+<trans-unit id="sb3d4f79d9d8b71e5">
+  <source>Submit</source>
+  <target>Kirim</target>
+</trans-unit>
+<trans-unit id="sa6873df757e9f393">
+  <source>Story has been added successfully</source>
+  <target>Cerita berhasil di tambahkan</target>
+</trans-unit>
+<trans-unit id="sb72c988ee15f790b">
+  <source>Failed to add story</source>
+  <target>Gagal menambahkan cerita</target>
+</trans-unit>
+<trans-unit id="sec77d4da6a57f2b7">
+  <source>Page not found</source>
+  <target>Halaman tidak ditemukan</target>
+</trans-unit>
+<trans-unit id="s7fee95b66225e1fb">
+  <source>Dashboard</source>
+  <target>Dasbor</target>
+</trans-unit>
+<trans-unit id="s136b0e562d93a8f0">
+  <source>Developed by</source>
+  <target>Dikembangkan oleh</target>
+</trans-unit>
+<trans-unit id="s3f1046395b601bb3">
+  <source>Contact me:</source>
+  <target>Kontak saya:</target>
+</trans-unit>
+<trans-unit id="s985bc233a2ae259f">
+  <source>Choose a file*</source>
+  <target>Pilih file:</target>
+</trans-unit>
+<trans-unit id="s38f2e04876af7406">
+  <source>Story description*</source>
+  <target>Deskripsi cerita*</target>
+</trans-unit>
+</body>
+</file>
+</xliff>
