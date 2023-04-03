@@ -151,7 +151,7 @@ class Form extends LitWithoutShadowDom {
     const timeToNavigate = 2500;
 
     this.#setTimeoutCallback(() => {
-      window.history.pushState({}, '', '/#/dashboard');
+      window.history.pushState({}, '', '/');
       window.dispatchEvent(new Event('hashchange'));
     }, timeToNavigate);
   }
