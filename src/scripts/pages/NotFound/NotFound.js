@@ -1,4 +1,5 @@
 import { css, html, LitElement } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import '../../components/Error/Error';
 
 class NotFound extends LitElement {
@@ -18,8 +19,13 @@ class NotFound extends LitElement {
     `;
   }
 
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
-    return html` <h2>Page Not Found</h2> `;
+    return html` <h2>${msg('Page not found')}</h2> `;
   }
 }
 

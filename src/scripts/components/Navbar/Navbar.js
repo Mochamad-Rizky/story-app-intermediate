@@ -1,8 +1,14 @@
 import { html } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import '../UI/Button/Button';
 
 class AppBar extends LitWithoutShadowDom {
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
     const lang = localStorage.getItem('lang');
 
@@ -25,6 +31,9 @@ class AppBar extends LitWithoutShadowDom {
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+              <li class="nav-item d-flex align-items-center">
+                <locale-picker class="d-block m-0"></locale-picker>
+              </li>
               <li class="nav-item">
                 <app-button
                   class="nav-link"
@@ -32,12 +41,12 @@ class AppBar extends LitWithoutShadowDom {
                   link="/#/dashboard?lang=${lang}"
                   defaultRoute="/"
                 >
-                  Dashboard
+                  ${msg('Dashboard')}
                 </app-button>
               </li>
               <li class="nav-item">
                 <app-button class="nav-link" renderType="link" link="/#/add-story?lang=${lang}">
-                  Add Story
+                  ${msg('Add Story')}
                 </app-button>
               </li>
             </ul>

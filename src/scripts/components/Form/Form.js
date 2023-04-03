@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import '../UI/Input/Input';
 import '../UI/Button/Button';
@@ -21,9 +22,14 @@ class Form extends LitWithoutShadowDom {
     };
   }
 
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
     return html`
-      <h1 class="fs-2 text-white text-center bg-onyx py-3 rounded mx-auto">Add Story</h1>
+      <h1 class="fs-2 text-white text-center bg-onyx py-3 rounded mx-auto">${msg('Add Story')}</h1>
       <form class="mt-4 needs-validation" novalidate @submit=${this.#onSubmitForm}>
         <img
           class="mx-auto d-block mb-3 mt-2"
@@ -34,29 +40,28 @@ class Form extends LitWithoutShadowDom {
         />
         <input-form
           id="storyFile"
-          label="Choose file*"
+          label=${msg('Choose a file*')}
           type="file"
           value=""
-          placeholder="Choose file"
           accept="image/*"
           border
           event="change"
           @getFile=${this.#onInputFile}
-          validFeedback="Looks good!"
-          invalidFeedback="Please choose a file."
+          validFeedback=${msg('Looks good!')}
+          invalidFeedback=${msg('Please choose a file.')}
         >
         </input-form>
         <input-form
           id="name"
-          label="Description*"
+          label=${msg('Story description*')}
           type="text"
           value=""
-          placeholder="Story description"
+          placeholder=${msg('Story description')}
           textarea
           event="change"
           @getValue=${this.#onInputValue.bind(this, 'descriptionInput')}
-          validFeedback="Looks good!"
-          invalidFeedback="Please enter a description."
+          validFeedback=${msg('Looks good!')}
+          invalidFeedback=${msg('Please enter a description.')}
         >
         </input-form>
         <app-button
@@ -65,7 +70,7 @@ class Form extends LitWithoutShadowDom {
           renderType="button"
           event="click"
         >
-          ${this.isLoading ? 'Loading...' : 'Submit'}
+          ${this.isLoading ? 'Loading...' : msg('Submit')}
         </app-button>
       </form>
       ${this.showAlert?.status &&
@@ -94,7 +99,7 @@ class Form extends LitWithoutShadowDom {
       const status = await api.postStory();
       this.showAlert = {
         status: true,
-        message: 'Story has been added successfully',
+        message: msg('Story has been added successfully'),
         class: 'alert-success',
       };
 
@@ -106,7 +111,7 @@ class Form extends LitWithoutShadowDom {
     } catch (error) {
       this.showAlert = {
         status: true,
-        message: 'Failed to add story',
+        message: msg('Failed to add story'),
         class: 'alert-danger',
       };
       this.#removeAlert();

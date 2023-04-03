@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import api from '../../utils/api';
 import LitWithoutShadowDom from '../../components/LitWithoutShadowDom/LitWithoutShadowDom';
 import renderSkeletonUICard from '../../utils/renderSkeletonUICard';
@@ -19,6 +20,11 @@ class Dashboard extends LitWithoutShadowDom {
         type: Object,
       },
     };
+  }
+
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
   }
 
   async connectedCallback() {
@@ -44,7 +50,7 @@ class Dashboard extends LitWithoutShadowDom {
   render() {
     return html`
       <div class="p-4 h-auto">
-        <h2 class="text-white">List Story</h2>
+        <h2 class="text-white">${msg('List Story')}</h2>
         <div class="row position-relative d-flex align-items-center justify-content-center">
           ${this.data &&
           !this.isLoading &&

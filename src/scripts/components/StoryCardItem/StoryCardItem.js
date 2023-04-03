@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import convertDate from '../../utils/convertDate';
 
@@ -30,6 +31,11 @@ class StoryCardItem extends LitWithoutShadowDom {
     };
   }
 
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
     return html`
       <article class="p-2 my-2 card__container">
@@ -49,9 +55,9 @@ class StoryCardItem extends LitWithoutShadowDom {
               class="btn btn-primary"
               @click=${this.#setShowModal}
               data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
+              data-bs-target="#storyCardModal"
             >
-              Detail
+              ${msg('Detail')}
             </button>
           </div>
         </div>

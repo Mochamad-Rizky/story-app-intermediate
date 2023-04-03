@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import convertDate from '../../utils/convertDate';
 
@@ -23,19 +24,24 @@ class Modal extends LitWithoutShadowDom {
     };
   }
 
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
     return html`
       <div
         class="modal fade"
-        id="exampleModal"
+        id="storyCardModal"
         tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="storyCardModalLabel"
         aria-hidden="true"
       >
         <div class="modal-dialog-centered modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">${this.name}</h1>
+              <h1 class="modal-title fs-5" id="storyCardModalLabel">${this.name}</h1>
               <button
                 type="button"
                 class="btn-close"
@@ -49,7 +55,9 @@ class Modal extends LitWithoutShadowDom {
               <p class="card-text mt-2">${this.description}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                ${msg('Close')}
+              </button>
             </div>
           </div>
         </div>

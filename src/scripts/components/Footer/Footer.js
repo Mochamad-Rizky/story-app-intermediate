@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { msg, updateWhenLocaleChanges } from '@lit/localize';
 
 class Footer extends LitElement {
   static get styles() {
@@ -24,12 +25,18 @@ class Footer extends LitElement {
     `;
   }
 
+  constructor() {
+    super();
+    updateWhenLocaleChanges(this);
+  }
+
   render() {
     return html`
       <div class="footer-description">
-        <p>Developed by, Mochamad Rizky Cahya Diputra</p>
+        <p>${msg('Developed by')}: Mochamad Rizky Cahya Diputra</p>
         <p>
-          Contact me: <a href="mailto:moch.rizky.cahya@gmail.com">moch.rizky.cahya@gmail.com</a>
+          ${msg('Contact me:')}
+          <a href="mailto:moch.rizky.cahya@gmail.com">moch.rizky.cahya@gmail.com</a>
         </p>
       </div>
     `;
