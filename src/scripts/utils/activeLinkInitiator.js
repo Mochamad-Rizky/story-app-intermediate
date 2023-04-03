@@ -8,7 +8,7 @@ class ActiveLinkInitiator {
 
   #performAction(links, route) {
     links.forEach((link) => {
-      const linkRoute = link.getAttribute('href').slice(2);
+      const linkRoute = link.getAttribute('href').slice(2).split('?')[0];
       const { defaultRoute } = link.dataset;
 
       this.#addActiveClass({
