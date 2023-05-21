@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import '../UI/Button/Button';
+import checkAuthUser from '../../utils/checkAuthUser';
 
 class AppBar extends LitWithoutShadowDom {
   constructor() {
@@ -34,21 +35,28 @@ class AppBar extends LitWithoutShadowDom {
               <li class="nav-item d-flex align-items-center">
                 <locale-picker class="d-block m-0"></locale-picker>
               </li>
-              <li class="nav-item">
-                <app-button
-                  class="nav-link"
-                  renderType="link"
-                  link="/#/dashboard?lang=${lang}"
-                  defaultRoute="/"
-                >
-                  ${msg('Dashboard')}
+              ${checkAuthUser() &&
+              html` <li class="nav-item">
+                  <app-button
+                    class="nav-link"
+                    renderType="link"
+                    link="/#/dashboard?lang=${lang}"
+                    defaultRoute="/"
+                  >
+                    ${msg('Dashboard')}
+                  </app-button>
+                </li>
+                <li class="nav-item">
+                  <app-button class="nav-link" renderType="link" link="/#/add-story?lang=${lang}">
+                    ${msg('Add Story')}
+                  </app-button>
+                </li>`}
+              ${!checkAuthUser() &&
+              html` <li class="nav-item">
+                <app-button class="nav-link" renderType="link" link="/#/login?lang=${lang}">
+                  Login
                 </app-button>
-              </li>
-              <li class="nav-item">
-                <app-button class="nav-link" renderType="link" link="/#/add-story?lang=${lang}">
-                  ${msg('Add Story')}
-                </app-button>
-              </li>
+              </li>`}
             </ul>
           </div>
         </div>
