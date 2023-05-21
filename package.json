@@ -36,7 +36,9 @@
   },
   "dependencies": {
     "@lit/localize": "^0.11.4",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
+    "dotenv-webpack": "^8.0.1",
     "eslint-config-prettier": "^8.8.0",
     "lit": "^2.7.0"
   }
