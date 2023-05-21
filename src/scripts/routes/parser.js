@@ -1,5 +1,7 @@
 import pages from './routes';
 import Route from '../utils/route';
+import checkAuthUser from '../utils/checkAuthUser';
+import checkLang from '../utils/lang';
 
 class Parser {
   constructor(rootElement) {
@@ -7,7 +9,23 @@ class Parser {
     this.route = Route.getRouteWithoutHash(window.location.href).pathname;
   }
 
-  async checkIfPageExists({ notFound }) {
+  async checkIfPageExists({
+    notFound,
+    excludePagesWhenAuthenticated,
+    redirectPageWhenNotAuthenticated,
+  }) {
+    const authUserStatus = checkAuthUser();
+
+    if (authUserStatus && excludePagesWhenAuthenticated.includes(this.route)) {
+      return pages[notFound];
+    }
+
+    if (!authUserStatus && !excludePagesWhenAuthenticated.includes(this.route)) {
+      window.history.pushState({}, {}, `/#${redirectPageWhenNotAuthenticated}`);
+      checkLang();
+      return pages[redirectPageWhenNotAuthenticated];
+    }
+
     return pages[this.route] || pages[notFound];
   }
 
