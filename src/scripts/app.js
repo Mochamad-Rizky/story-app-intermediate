@@ -17,6 +17,8 @@ class App {
 
     const page = await parser.checkIfPageExists({
       notFound: '/not-found',
+      excludePagesWhenAuthenticated: ['/login', '/register', '/add-story/guest'],
+      redirectPageWhenNotAuthenticated: '/login',
     });
 
     await parser.definePage(page);
