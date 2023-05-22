@@ -21,6 +21,12 @@ class Modal extends LitWithoutShadowDom {
       createdAt: {
         type: String,
       },
+      isError: {
+        type: String,
+      },
+      isLoading: {
+        type: String,
+      },
     };
   }
 
@@ -30,6 +36,9 @@ class Modal extends LitWithoutShadowDom {
   }
 
   render() {
+    this.isLoading = !this.isLoading ? null : this.isLoading;
+
+    console.log(this.isLoading);
     return html`
       <div
         class="modal fade"
@@ -41,7 +50,9 @@ class Modal extends LitWithoutShadowDom {
         <div class="modal-dialog-centered modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="storyCardModalLabel">${this.name}</h1>
+              <h1 class="modal-title fs-5" id="storyCardModalLabel">
+                ${this.isLoading ? 'Loading...' : this.name}
+              </h1>
               <button
                 type="button"
                 class="btn-close"
@@ -50,9 +61,20 @@ class Modal extends LitWithoutShadowDom {
               ></button>
             </div>
             <div class="modal-body">
-              <img src=${this.image} alt=${this.name} class="img-fluid rounded mt-2" />
-              <span class="text-secondary fs-6 mt-2 d-block">${convertDate(this.createdAt)}</span>
-              <p class="card-text mt-2">${this.description}</p>
+              ${this.isError &&
+              html`<div class="alert alert-danger text-center">${this.isError}</div>`}
+              ${this.isLoading && html`<h2 class="text-center">Loading...</h2>`}
+              ${!this.isLoading
+                ? html` <img
+                      src=${this.image}
+                      alt=${this.name}
+                      class="img-fluid mx-auto d-block rounded mt-2"
+                    />
+                    <span class="text-secondary fs-6 mt-2 d-block"
+                      >${convertDate(this.createdAt)}</span
+                    >
+                    <p class="card-text mt-2">${this.description}</p>`
+                : null}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
