@@ -3,6 +3,7 @@ import { msg, updateWhenLocaleChanges } from '@lit/localize';
 import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import '../UI/Button/Button';
 import checkAuthUser from '../../utils/checkAuthUser';
+import Token from '../../utils/token';
 
 class AppBar extends LitWithoutShadowDom {
   constructor() {
@@ -36,7 +37,8 @@ class AppBar extends LitWithoutShadowDom {
                 <locale-picker class="d-block m-0"></locale-picker>
               </li>
               ${checkAuthUser() &&
-              html` <li class="nav-item">
+              html`
+                <li class="nav-item">
                   <app-button
                     class="nav-link"
                     renderType="link"
@@ -50,11 +52,17 @@ class AppBar extends LitWithoutShadowDom {
                   <app-button class="nav-link" renderType="link" link="/#/add-story?lang=${lang}">
                     ${msg('Add Story')}
                   </app-button>
-                </li>`}
+                </li>
+                <li class="nav-item">
+                  <app-button renderType="button" event="click" @clickButton=${this.#onLogout}>
+                    ${msg('Logout')}
+                  </app-button>
+                </li>
+              `}
               ${!checkAuthUser() &&
               html` <li class="nav-item">
                 <app-button class="nav-link" renderType="link" link="/#/login?lang=${lang}">
-                  Login
+                  ${msg('Login')}
                 </app-button>
               </li>`}
             </ul>
@@ -62,6 +70,24 @@ class AppBar extends LitWithoutShadowDom {
         </div>
       </nav>
     `;
+  }
+
+  firstUpdated(_changedProperties) {
+    super.firstUpdated(_changedProperties);
+
+    document.addEventListener('updateNavbar', () => {
+      this.requestUpdate();
+    });
+  }
+
+  #onLogout() {
+    Token.delete();
+    this.#redirectToRoot();
+  }
+
+  #redirectToRoot() {
+    window.history.pushState({}, '', '/');
+    window.dispatchEvent(new Event('hashchange'));
   }
 }
 
