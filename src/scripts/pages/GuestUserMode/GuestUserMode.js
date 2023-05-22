@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import LitWithoutShadowDom from '../../components/LitWithoutShadowDom/LitWithoutShadowDom';
-import '../../components/Form/Form';
+import '../../components/AddStory/AddStory';
 import { msg, updateWhenLocaleChanges } from '@lit/localize';
 
 class AddStoryAsGuest extends LitWithoutShadowDom {
