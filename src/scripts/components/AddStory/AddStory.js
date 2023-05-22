@@ -6,7 +6,7 @@ import '../UI/Button/Button';
 import '../Alert/Alert';
 import api from '../../utils/api';
 
-class Form extends LitWithoutShadowDom {
+class AddStory extends LitWithoutShadowDom {
   static get properties() {
     return {
       srcImage: {
@@ -192,4 +192,4 @@ class Form extends LitWithoutShadowDom {
   }
 }
 
-customElements.define('form-app', Form);
+customElements.define('form-app', AddStory);
