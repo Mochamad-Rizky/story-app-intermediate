@@ -7,6 +7,10 @@
   .card {
     position: relative;
 
+    img {
+      object-fit: cover;
+    }
+
     &-body {
       p {
         display: -webkit-box;
