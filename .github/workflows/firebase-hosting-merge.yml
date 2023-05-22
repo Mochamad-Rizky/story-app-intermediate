@@ -23,7 +23,7 @@ jobs:
         env:
           BASE_URL: ${{ vars.BASE_URL }}
       - name: see env
-        run: ${{ env.BASE_URL }}
+        run: ${{ vars.BASE_URL }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
