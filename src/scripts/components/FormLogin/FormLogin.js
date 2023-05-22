@@ -51,7 +51,7 @@ class FormLogin extends LitWithoutShadowDom {
           type="password"
           value=""
           event="change"
-          placeholder="Enter password"
+          placeholder=${msg('Enter password')}
           @getValue=${this.#onInputValue.bind(this, 'passwordInput')}
           validFeedback=${msg('Password is valid')}
           invalidFeedback=${msg('Password is invalid')}
