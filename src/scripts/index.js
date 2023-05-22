@@ -1,6 +1,7 @@
 import App from './app';
 import ActiveLinkInitiator from './utils/activeLinkInitiator';
 import checkLang from './utils/lang';
+import getLinks from './utils/getLinks';
 import { setLocaleFromUrl } from './utils/localization';
 
 import '../styles/main.scss';
@@ -13,19 +14,21 @@ import './components/LocalePicker/LocalePicker';
 const app = new App();
 const activeLinkInitiator = new ActiveLinkInitiator();
 
-let links;
 window.addEventListener('DOMContentLoaded', async () => {
   await app.renderPage();
 
-  links = document.querySelectorAll('app-button[renderType="link"][class="nav-link"]');
-  links = Array.from(links).map((link) => link.shadowRoot.querySelector('a'));
-
+  const links = getLinks();
   activeLinkInitiator.update(links);
+
   setLocaleFromUrl();
 });
 
 window.addEventListener('hashchange', async () => {
   checkLang();
+  document.dispatchEvent(new CustomEvent('updateNavbar'));
+
   await app.renderPage();
+
+  const links = getLinks();
   activeLinkInitiator.update(links);
 });
