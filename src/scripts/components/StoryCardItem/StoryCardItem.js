@@ -4,6 +4,7 @@ import LitWithoutShadowDom from '../LitWithoutShadowDom/LitWithoutShadowDom';
 import convertDate from '../../utils/convertDate';
 
 import '../Modal/Modal';
+import api from '../../utils/api';
 
 class StoryCardItem extends LitWithoutShadowDom {
   static get properties() {
@@ -65,13 +66,28 @@ class StoryCardItem extends LitWithoutShadowDom {
     `;
   }
 
-  #setShowModal() {
+  async #setShowModal() {
     const modalElement = document.querySelector('modal-app');
-    modalElement.setAttribute('id', this.id);
-    modalElement.setAttribute('name', this.name);
-    modalElement.setAttribute('description', this.description);
-    modalElement.setAttribute('image', this.image);
-    modalElement.setAttribute('createdAt', this.createdAt);
+
+    try {
+      modalElement.setAttribute('isLoading', 'true');
+      const response = await api.getDetailStory(this.id);
+      const { id, name, description, photoUrl, createdAt } = response.story;
+
+      modalElement.setAttribute('id', id);
+      modalElement.setAttribute('name', name);
+      modalElement.setAttribute('description', description);
+      modalElement.setAttribute('image', photoUrl);
+      modalElement.setAttribute('createdAt', createdAt);
+    } catch (error) {
+      const {
+        data: { message },
+      } = JSON.parse(error.message);
+
+      modalElement.setAttribute('isError', message);
+    } finally {
+      modalElement.setAttribute('isLoading', '');
+    }
   }
 }
 
