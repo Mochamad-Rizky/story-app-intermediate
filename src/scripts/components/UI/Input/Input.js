@@ -30,6 +30,9 @@ class Input extends LitWithoutShadowDom {
       border: {
         type: Boolean,
       },
+      minLength: {
+        type: String,
+      },
       accept: {
         type: String,
       },
@@ -81,6 +84,7 @@ class Input extends LitWithoutShadowDom {
               value=${this.value}
               placeholder=${this.placeholder}
               accept=${this.accept || nothing}
+              minlength=${this.minLength || nothing}
               required
             />`}
         <div class="invalid-feedback text-danger">${this.invalidFeedback}</div>
