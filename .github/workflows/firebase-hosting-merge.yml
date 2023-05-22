@@ -18,12 +18,14 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: create env file
-        run: |
-          touch .env
-          echo BASE_URL=${{ vars.BASE_URL }} >> .env
+#      - name: create env file
+#        run: |
+#          touch .env
+#          echo BASE_URL=${{ vars.BASE_URL }} >> .env
       - name: npm build
         run: npm ci && npm run build
+        env:
+          BASE_URL= ${{ vars.BASE_URL }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
