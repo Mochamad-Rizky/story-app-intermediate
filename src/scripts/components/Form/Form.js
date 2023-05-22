@@ -13,6 +13,9 @@ class Form extends LitWithoutShadowDom {
         type: String,
         reflect: true,
       },
+      guestMode: {
+        type: Boolean,
+      },
       isLoading: {
         type: Boolean,
       },
@@ -24,13 +27,19 @@ class Form extends LitWithoutShadowDom {
 
   constructor() {
     super();
+    this.guestMode = false;
     updateWhenLocaleChanges(this);
   }
 
   render() {
     return html`
       <h1 class="fs-2 text-white text-center bg-onyx py-3 rounded mx-auto">${msg('Add Story')}</h1>
-      <form class="mt-4 needs-validation" novalidate @submit=${this.#onSubmitForm}>
+      <form
+        id="form-add-story"
+        class="mt-4 needs-validation"
+        novalidate
+        @submit=${this.#onSubmitForm}
+      >
         <img
           class="mx-auto d-block mb-3 mt-2"
           src=${this.srcImage}
@@ -86,7 +95,7 @@ class Form extends LitWithoutShadowDom {
   }
 
   async #onSubmitForm(event) {
-    const form = document.querySelector('.needs-validation');
+    const form = document.getElementById('form-add-story');
 
     if (!form.checkValidity()) {
       event.preventDefault();
@@ -96,22 +105,33 @@ class Form extends LitWithoutShadowDom {
 
     try {
       this.isLoading = true;
-      const status = await api.postStory();
+
+      const response = !this.guestMode
+        ? await api.postStory({
+            description: this['descriptionInput'],
+            photo: this.fileData,
+          })
+        : await api.postStoryAsGuest({
+            description: this['descriptionInput'],
+            photo: this.fileData,
+          });
+
       this.showAlert = {
         status: true,
-        message: msg('Story has been added successfully'),
+        message: response.message,
         class: 'alert-success',
       };
 
-      console.log(status);
-      console.log(this.fileData);
-      console.log(this['descriptionInput']);
       this.#removeAlert();
       this.#navigateToDashboard();
     } catch (error) {
+      const {
+        data: { message },
+      } = JSON.parse(error.message);
+
       this.showAlert = {
         status: true,
-        message: msg('Failed to add story'),
+        message,
         class: 'alert-danger',
       };
       this.#removeAlert();
@@ -123,7 +143,7 @@ class Form extends LitWithoutShadowDom {
   #onInputFile(event) {
     const { file } = event.detail;
 
-    if (file) {
+    if (file[0]) {
       const reader = new FileReader();
       reader.readAsDataURL(file[0]);
       reader.onload = () => {
@@ -133,6 +153,10 @@ class Form extends LitWithoutShadowDom {
         const image = this.querySelector('img');
         image.classList.add('resize');
       };
+    } else {
+      this.srcImage = '';
+      const image = this.querySelector('img');
+      image.classList.remove('resize');
     }
   }
 
