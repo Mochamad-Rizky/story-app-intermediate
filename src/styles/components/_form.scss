@@ -12,7 +12,7 @@ form-app {
       transition: transform 0.3s ease-in-out;
 
       &:hover {
-        cursor: zoom-in;
+        cursor: pointer;
         @include transform(scale(1.1));
       }
     }
